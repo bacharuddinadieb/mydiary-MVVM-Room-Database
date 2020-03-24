@@ -44,7 +44,7 @@ class MainFragment : Fragment() {
         binding.rvDiary.adapter = adapter
         diaryViewModel.semuaDataDiary.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 
