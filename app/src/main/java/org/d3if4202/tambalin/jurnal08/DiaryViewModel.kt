@@ -13,7 +13,12 @@ class DiaryViewModel(
 ) : AndroidViewModel(application) {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val _semuaDataDiary = database.getAllDiary()
+    private val _semuaDataDiary = database.getAllDiary() //LiveData
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 
     private suspend fun insert(diary: DiaryEntity) {
         withContext(Dispatchers.IO) {
@@ -33,5 +38,6 @@ class DiaryViewModel(
             insert(diaryBaru)
         }
     }
+
 
 }

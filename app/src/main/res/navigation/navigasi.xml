@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/fragmentAddDiary"
         android:name="org.d3if4202.tambalin.jurnal08.FragmentAddDiary"
-        android:label="Tambahkan Diary" />
+        android:label="Tambahkan Diary">
+        <action
+            android:id="@+id/action_fragmentAddDiary_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

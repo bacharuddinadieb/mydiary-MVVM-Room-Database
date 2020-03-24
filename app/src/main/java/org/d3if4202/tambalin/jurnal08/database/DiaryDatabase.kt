@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
     entities = [DiaryEntity::class], version = 1, exportSchema = false
 )
 abstract class DiaryDatabase : RoomDatabase() {
-    abstract val sleepDatabaseDao: DiaryDatabaseDAO
+    abstract val diaryDatabaseDao: DiaryDatabaseDAO
 
     companion object {
         @Volatile

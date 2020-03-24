@@ -17,11 +17,12 @@ fun formatDiary(diary: List<DiaryEntity>, resources: Resources): Spanned {
     val sb = StringBuilder()
     sb.apply {
         diary.forEach {
-            append("<br>")
             append(it.idDiary)
             append("<br>")
-            append("\t${ubahDateToString(it.tanggalDiary)}<br>")
+            append("${ubahDateToString(it.tanggalDiary)}<br>")
             append(it.isiDiary)
+            append("<br>")
+            append("<br>")
         }
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
