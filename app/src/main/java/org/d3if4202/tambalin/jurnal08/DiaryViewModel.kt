@@ -13,7 +13,6 @@ class DiaryViewModel(
 ) : AndroidViewModel(application) {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val _semuaDataDiary = database.getAllDiary() //LiveData
 
     override fun onCleared() {
         super.onCleared()
@@ -33,7 +32,9 @@ class DiaryViewModel(
     }
 
     // Fungsi yang bisa dipanggil
-    val semuaDataDiaryString = Transformations.map(_semuaDataDiary) { diary ->
+    val semuaDataDiary = database.getAllDiary()
+
+    val semuaDataDiaryString = Transformations.map(semuaDataDiary) { diary ->
         formatDiary(diary, application.resources)
     }
 

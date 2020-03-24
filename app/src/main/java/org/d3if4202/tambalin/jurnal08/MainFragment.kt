@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import org.d3if4202.tambalin.jurnal08.database.DiaryDatabase
@@ -38,6 +39,14 @@ class MainFragment : Fragment() {
         binding.fabTambahDiary.setOnClickListener {
             it.findNavController().navigate(R.id.action_mainFragment_to_fragmentAddDiary)
         }
+
+        val adapter = DiaryAdapter()
+        binding.rvDiary.adapter = adapter
+        diaryViewModel.semuaDataDiary.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
 
         return binding.root
     }

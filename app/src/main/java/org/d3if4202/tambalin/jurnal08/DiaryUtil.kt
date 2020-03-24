@@ -4,12 +4,14 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.widget.TextView
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.RecyclerView
 import org.d3if4202.tambalin.jurnal08.database.DiaryEntity
 import java.text.SimpleDateFormat
 
 fun ubahDateToString(systemTime: Long): String {
-    return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
+    return SimpleDateFormat("EEEE MMM-dd-yyyy")
         .format(systemTime).toString()
 }
 
@@ -31,3 +33,5 @@ fun formatDiary(diary: List<DiaryEntity>, resources: Resources): Spanned {
         return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }
+
+class TextItemViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
