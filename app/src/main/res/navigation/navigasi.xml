@@ -15,5 +15,5 @@
     <fragment
         android:id="@+id/fragmentAddDiary"
         android:name="org.d3if4202.tambalin.jurnal08.FragmentAddDiary"
-        android:label="FragmentAddDiary" />
+        android:label="Tambahkan Diary" />
 </navigation>
