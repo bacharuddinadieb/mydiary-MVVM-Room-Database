@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="diary"
             type="org.d3if4202.tambalin.jurnal08.database.DiaryEntity" />
+
+        <variable
+            name="clickListener"
+            type="org.d3if4202.tambalin.jurnal08.DiaryAdapter.DiaryListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(diary)}">
 
     <TextView
         android:id="@+id/tv_tanggalDiary"

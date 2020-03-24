@@ -40,7 +40,13 @@ class MainFragment : Fragment() {
             it.findNavController().navigate(R.id.action_mainFragment_to_fragmentAddDiary)
         }
 
-        val adapter = DiaryAdapter()
+        val adapter = DiaryAdapter(DiaryAdapter.DiaryListener { idDiary ->
+            Toast.makeText(
+                context,
+                "${idDiary}",
+                Toast.LENGTH_LONG
+            ).show()
+        })
         binding.rvDiary.adapter = adapter
         diaryViewModel.semuaDataDiary.observe(viewLifecycleOwner, Observer {
             it?.let {

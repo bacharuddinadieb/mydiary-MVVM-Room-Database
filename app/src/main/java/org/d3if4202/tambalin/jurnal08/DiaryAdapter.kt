@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.d3if4202.tambalin.jurnal08.database.DiaryEntity
 import org.d3if4202.tambalin.jurnal08.databinding.TextItemDiaryBinding
 
-class DiaryAdapter :
+class DiaryAdapter(val clickListener: DiaryListener) :
     androidx.recyclerview.widget.ListAdapter<DiaryEntity, DiaryAdapter.ViewHolder>(DiaryDiffCalback()) {
 
     override fun onCreateViewHolder(
@@ -22,9 +22,13 @@ class DiaryAdapter :
 
     class ViewHolder internal constructor(val binding: TextItemDiaryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: DiaryEntity) {
+        fun bind(
+            item: DiaryEntity,
+            clickListener: DiaryListener
+        ) {
             binding.diary = item
             binding.executePendingBindings()
+            binding.clickListener = clickListener
         }
 
         val tanggalDiary: TextView = binding.tvTanggalDiary
@@ -32,9 +36,7 @@ class DiaryAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.tanggalDiary.text = ubahDateToString(item.tanggalDiary)
-        holder.isiDiary.text = item.isiDiary
+        holder.bind(getItem(position)!!, clickListener)
     }
 
     class DiaryDiffCalback : DiffUtil.ItemCallback<DiaryEntity>() {
@@ -45,6 +47,10 @@ class DiaryAdapter :
         override fun areContentsTheSame(oldItem: DiaryEntity, newItem: DiaryEntity): Boolean {
             return oldItem == newItem
         }
+    }
+
+    class DiaryListener(val clickListener: (idDiary: Long) -> Unit) {
+        fun onClick(diary: DiaryEntity) = clickListener(diary.idDiary)
     }
 
 }
