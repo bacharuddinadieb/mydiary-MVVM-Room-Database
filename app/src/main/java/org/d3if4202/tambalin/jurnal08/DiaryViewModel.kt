@@ -26,6 +26,12 @@ class DiaryViewModel(
         }
     }
 
+    private suspend fun deleteAll() {
+        withContext(Dispatchers.IO) {
+            database.deleteAllDiary()
+        }
+    }
+
     // Fungsi yang bisa dipanggil
     val semuaDataDiaryString = Transformations.map(_semuaDataDiary) { diary ->
         formatDiary(diary, application.resources)
@@ -39,5 +45,10 @@ class DiaryViewModel(
         }
     }
 
+    fun hapusSemuaDiary() {
+        uiScope.launch {
+            deleteAll()
+        }
+    }
 
 }
