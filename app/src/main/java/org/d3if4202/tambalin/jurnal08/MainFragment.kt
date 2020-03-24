@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import org.d3if4202.tambalin.jurnal08.database.DiaryDatabase
 import org.d3if4202.tambalin.jurnal08.databinding.FragmentMainBinding
 
@@ -41,16 +42,19 @@ class MainFragment : Fragment() {
         }
 
         val adapter = DiaryAdapter(DiaryAdapter.DiaryListener { idDiary ->
-            Toast.makeText(
-                context,
-                "${idDiary}",
-                Toast.LENGTH_LONG
-            ).show()
+            diaryViewModel.onItemDiaryDitekan(idDiary)
         })
         binding.rvDiary.adapter = adapter
         diaryViewModel.semuaDataDiary.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+            }
+        })
+        diaryViewModel.navigateToUpdateDiaryDetail.observe(viewLifecycleOwner, Observer { diary ->
+            diary?.let {
+                this.findNavController()
+                    .navigate(MainFragmentDirections.actionMainFragmentToFragmentUpdateDiary(diary))
+                diaryViewModel.onItemDiarySudahDitekan()
             }
         })
 

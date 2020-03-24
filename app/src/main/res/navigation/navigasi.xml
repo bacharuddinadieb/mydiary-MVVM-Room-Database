@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigasi"
     app:startDestination="@id/mainFragment">
 
@@ -11,6 +12,9 @@
         <action
             android:id="@+id/action_mainFragment_to_fragmentAddDiary"
             app:destination="@id/fragmentAddDiary" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragmentUpdateDiary"
+            app:destination="@id/fragmentUpdateDiary" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAddDiary"
@@ -19,5 +23,14 @@
         <action
             android:id="@+id/action_fragmentAddDiary_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentUpdateDiary"
+        android:name="org.d3if4202.tambalin.jurnal08.FragmentUpdateDiary"
+        android:label="FragmentUpdateDiary"
+        tools:layout="@layout/fragment_update_diary">
+        <argument
+            android:name="diaryKey"
+            app:argType="long" />
     </fragment>
 </navigation>
