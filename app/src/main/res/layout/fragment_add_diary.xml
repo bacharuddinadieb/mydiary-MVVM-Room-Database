@@ -17,14 +17,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:ems="10"
             android:gravity="bottom"
-            android:inputType="textPersonName"
-            android:singleLine="false"
-            android:text="Name"
+            android:hapticFeedbackEnabled="true"
+            android:maxLines="10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus est vel risus facilisis, ut placerat tellus sagittis. Quisque purus ante, vehicula et sollicitudin eget." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

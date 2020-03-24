@@ -11,7 +11,7 @@ import org.d3if4202.tambalin.jurnal08.database.DiaryEntity
 import java.text.SimpleDateFormat
 
 fun ubahDateToString(systemTime: Long): String {
-    return SimpleDateFormat("EEEE MMM-dd-yyyy")
+    return SimpleDateFormat("EEEE, MMMM dd yyyy")
         .format(systemTime).toString()
 }
 
