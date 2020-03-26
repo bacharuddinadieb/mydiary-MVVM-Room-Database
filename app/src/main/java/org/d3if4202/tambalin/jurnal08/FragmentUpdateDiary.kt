@@ -51,7 +51,7 @@ class FragmentUpdateDiary : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_tambahUpdate -> {
-
+                diaryViewModel.updateDiary(idDiary, binding.etUpdateDiary.text.toString())
                 Toast.makeText(activity, "Berhasil memperbarui diary", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_fragmentUpdateDiary_to_mainFragment)
                 return true

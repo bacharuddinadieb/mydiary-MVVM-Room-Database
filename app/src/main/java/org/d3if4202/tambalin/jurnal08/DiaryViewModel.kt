@@ -40,6 +40,14 @@ class DiaryViewModel(
         }
     }
 
+    private suspend fun update(idDiary: Long, isiDiary: String) {
+        withContext(Dispatchers.IO) {
+            var dataDiary = database.getDiaryById(idDiary)
+            dataDiary!!.isiDiary = isiDiary
+            database.updateDiary(dataDiary)
+        }
+    }
+
     // ----------- Fungsi yang bisa dipanggil ------------------------------------------------
     val semuaDataDiary = database.getAllDiary()
     val navigateToUpdateDiaryDetail get() = _navigateToUpdateDiaryDetail
@@ -77,6 +85,12 @@ class DiaryViewModel(
     fun hapusDiary(idDiary: Long) {
         uiScope.launch {
             deleteDiary(idDiary)
+        }
+    }
+
+    fun updateDiary(idDiary: Long, isiDiary: String) {
+        uiScope.launch {
+            update(idDiary, isiDiary)
         }
     }
 
