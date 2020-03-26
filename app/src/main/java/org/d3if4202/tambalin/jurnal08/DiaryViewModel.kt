@@ -40,7 +40,7 @@ class DiaryViewModel(
         }
     }
 
-    // Fungsi yang bisa dipanggil
+    // ----------- Fungsi yang bisa dipanggil ------------------------------------------------
     val semuaDataDiary = database.getAllDiary()
     val navigateToUpdateDiaryDetail get() = _navigateToUpdateDiaryDetail
     val navigateToUpdateDiaryDetailIsi get() = _navigateToUpdateDiaryDetailIsi

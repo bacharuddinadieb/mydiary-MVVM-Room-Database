@@ -18,6 +18,7 @@ class FragmentUpdateDiary : Fragment() {
     lateinit var binding: FragmentUpdateDiaryBinding
     lateinit var viewModelFactory: DiaryViewModelFactory
     lateinit var diaryViewModel: DiaryViewModel
+    var idDiary: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +31,14 @@ class FragmentUpdateDiary : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = DiaryDatabase.getInstance(application).diaryDatabaseDao
         val args = arguments?.let { FragmentUpdateDiaryArgs.fromBundle(it) }
+        idDiary = args!!.diaryKey
 
         viewModelFactory = DiaryViewModelFactory(dataSource, application)
         diaryViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(DiaryViewModel::class.java)
 
-        Log.i("asdqwe", "${args?.diaryKey} + ${args?.diaryTextKey}")
-        binding.etUpdateDiary.setText(args?.diaryTextKey)
+        Log.i("asdqwe", "${args.diaryKey} + ${args.diaryTextKey}")
+        binding.etUpdateDiary.setText(args.diaryTextKey)
 
         return binding.root
     }
@@ -55,7 +57,7 @@ class FragmentUpdateDiary : Fragment() {
                 return true
             }
             R.id.menu_hapusUpdate -> {
-
+                diaryViewModel.hapusDiary(idDiary)
                 Toast.makeText(activity, "Berhasil menghapus diary", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_fragmentUpdateDiary_to_mainFragment)
                 return true
