@@ -15,6 +15,7 @@ class DiaryViewModel(
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val _navigateToUpdateDiaryDetail = MutableLiveData<Long>()
+    private val _navigateToUpdateDiaryDetailIsi = MutableLiveData<String>()
 
     override fun onCleared() {
         super.onCleared()
@@ -33,9 +34,17 @@ class DiaryViewModel(
         }
     }
 
+    private suspend fun deleteDiary(idDiary: Long) {
+        withContext(Dispatchers.IO) {
+            database.deleteDiary(idDiary)
+        }
+    }
+
     // Fungsi yang bisa dipanggil
     val semuaDataDiary = database.getAllDiary()
     val navigateToUpdateDiaryDetail get() = _navigateToUpdateDiaryDetail
+    val navigateToUpdateDiaryDetailIsi get() = _navigateToUpdateDiaryDetailIsi
+    var asd = DiaryEntity()
 
     val semuaDataDiaryString = Transformations.map(semuaDataDiary) { diary ->
         formatDiary(diary, application.resources)
@@ -55,12 +64,20 @@ class DiaryViewModel(
         }
     }
 
-    fun onItemDiaryDitekan(id: Long) {
+    fun onItemDiaryDitekan(id: Long, isi: String) {
         _navigateToUpdateDiaryDetail.value = id
+        _navigateToUpdateDiaryDetailIsi.value = isi
     }
 
     fun onItemDiarySudahDitekan() {
         _navigateToUpdateDiaryDetail.value = null
+        _navigateToUpdateDiaryDetailIsi.value = null
+    }
+
+    fun hapusDiary(idDiary: Long) {
+        uiScope.launch {
+            deleteDiary(idDiary)
+        }
     }
 
 }

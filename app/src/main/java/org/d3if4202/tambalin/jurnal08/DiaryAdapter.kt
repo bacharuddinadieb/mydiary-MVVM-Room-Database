@@ -49,8 +49,8 @@ class DiaryAdapter(val clickListener: DiaryListener) :
         }
     }
 
-    class DiaryListener(val clickListener: (idDiary: Long) -> Unit) {
-        fun onClick(diary: DiaryEntity) = clickListener(diary.idDiary)
+    class DiaryListener(val clickListener: (idDiary: Long, isiDiary: String) -> Unit) {
+        fun onClick(diaryId: Long, diaryText: String) = clickListener(diaryId, diaryText)
     }
 
 }

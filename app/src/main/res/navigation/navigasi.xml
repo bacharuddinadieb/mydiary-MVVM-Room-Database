@@ -32,5 +32,11 @@
         <argument
             android:name="diaryKey"
             app:argType="long" />
+        <action
+            android:id="@+id/action_fragmentUpdateDiary_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <argument
+            android:name="diaryTextKey"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -18,9 +18,6 @@ interface DiaryDatabaseDAO {
     @Query("SELECT * from diary_table ORDER BY idDiary DESC LIMIT 1")
     fun getDiary(): DiaryEntity?
 
-    @Query("SELECT * from diary_table WHERE idDiary = :key")
-    fun getDiaryById(key: Long): DiaryEntity?
-
     @Query("SELECT * FROM diary_table ORDER BY idDiary DESC")
     fun getAllDiary(): LiveData<List<DiaryEntity>>
 

@@ -34,15 +34,13 @@ class MainFragment : Fragment() {
         viewModelFactory = DiaryViewModelFactory(dataSource, application)
         diaryViewModel =
             ViewModelProviders.of(this, viewModelFactory).get(DiaryViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.diaryViewModel = diaryViewModel
 
         binding.fabTambahDiary.setOnClickListener {
             it.findNavController().navigate(R.id.action_mainFragment_to_fragmentAddDiary)
         }
 
-        val adapter = DiaryAdapter(DiaryAdapter.DiaryListener { idDiary ->
-            diaryViewModel.onItemDiaryDitekan(idDiary)
+        val adapter = DiaryAdapter(DiaryAdapter.DiaryListener { idDiary, isiDiary ->
+            diaryViewModel.onItemDiaryDitekan(idDiary, isiDiary)
         })
         binding.rvDiary.adapter = adapter
         diaryViewModel.semuaDataDiary.observe(viewLifecycleOwner, Observer {
@@ -50,11 +48,22 @@ class MainFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
-        diaryViewModel.navigateToUpdateDiaryDetail.observe(viewLifecycleOwner, Observer { diary ->
-            diary?.let {
-                this.findNavController()
-                    .navigate(MainFragmentDirections.actionMainFragmentToFragmentUpdateDiary(diary))
-                diaryViewModel.onItemDiarySudahDitekan()
+
+        diaryViewModel.navigateToUpdateDiaryDetail.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                var idDiary = it
+                diaryViewModel.navigateToUpdateDiaryDetailIsi.observe(viewLifecycleOwner, Observer {
+                    it?.let {
+                        this.findNavController()
+                            .navigate(
+                                MainFragmentDirections.actionMainFragmentToFragmentUpdateDiary(
+                                    idDiary,
+                                    it
+                                )
+                            )
+                        diaryViewModel.onItemDiarySudahDitekan()
+                    }
+                })
             }
         })
 
